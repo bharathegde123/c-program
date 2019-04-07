@@ -1,0 +1,67 @@
+#include<stdio.h>
+void input1(int *size)
+{   
+     printf("enter the num array size,den array size");
+     scanf("%d",size);
+}
+void input2(int size,int n[],int d[])
+{
+    int i;
+    printf("enter the elements for numarator");
+    for(i=0;i<size;i++)
+    scanf("%d",&n[i]);
+    printf("enter the values for denominator");
+    for(i=0;i<size;i++)
+    scanf("%d",&d[i]);
+}
+int check(int size,int d[size])
+{    int i; 
+     for(i=0;i<size;i++)   
+     {  if(d[i]==0)
+        return 5;
+     }
+}   
+
+int process1(int size,int d[],int n[],int *densum) 
+{    
+    int numsum=0,lcm=1,s=1,i;
+    
+           for(i=0;i<size;i++)
+    {      lcm=lcm*d[i];
+           s=lcm/d[i];
+           numsum=(numsum)+(s*n[i]);
+           *densum=lcm;
+    }
+        
+        return numsum;
+                         
+}
+
+void output(int size,int d[],int n[],int numsum,int densum)
+{   
+    int i;
+    for(i=0;i<size;i++)
+    printf("%d/%d+",n[i],d[i]);
+    printf("=%d/%d",numsum,densum);
+
+}
+
+int main()
+{
+    int n[100],d[100],size,k,numsum,densum,lcm;
+    input1(&size);
+    input2(size,&n[0],&d[0]);
+    k=check(size,&d[size]);
+      if(k==5)
+    {
+        printf("invalid input");
+    }
+      else 
+    {
+        numsum=process1(size,d,n,&densum);
+        output(size,&d[size],&n[size],numsum,densum);
+        
+    }
+
+return 0;
+}
